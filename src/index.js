@@ -24,26 +24,34 @@ const fAge = Number(prompt("Скільки років батьку?"));
 const sAge = Number(prompt("Скільки років сину?"));
 
 const result = ageCheck(fAge, sAge);
+console.log(result);
 
 if (result < 9999) {
   if (result > 0) {
-    if (result === 1) {
-      console.log("Батько буде удвічі старший за сина через 1 рік");
-    } else if (result >= 2 && result <= 4) {
-      console.log(`Батько буде удвічі старший за сина через ${result} роки`);
-    } else {
-      console.log(`Батько буде удвічі старший за сина через ${result} років`);
-    }
-  } else {
-    const yearsAgo = Math.abs(result);
+    const word =
+      result % 10 === 1 && result % 100 !== 11
+        ? "рік"
+        : result % 10 >= 2 &&
+            result % 10 <= 4 &&
+            (result % 100 < 10 || result % 100 > 20)
+          ? "роки"
+          : "років";
 
-    if (yearsAgo === 1) {
-      console.log("Батько був удвічі старший за сина 1 рік тому");
-    } else if (yearsAgo >= 2 && yearsAgo <= 4) {
-      console.log(`Батько був удвічі старший за сина ${yearsAgo} роки тому`);
-    } else {
-      console.log(`Батько був удвічі старший за сина ${yearsAgo} років тому`);
-    }
+    console.log(`Батько буде удвічі старший за сина через ${result} ${word}`);
+  } else if (result < 0) {
+    const yearsAgo = Math.abs(result);
+    const word =
+      yearsAgo % 10 === 1 && yearsAgo % 100 !== 11
+        ? "рік"
+        : yearsAgo % 10 >= 2 &&
+            yearsAgo % 10 <= 4 &&
+            (yearsAgo % 100 < 10 || yearsAgo % 100 > 20)
+          ? "роки"
+          : "років";
+
+    console.log(`Батько був удвічі старший за сина ${yearsAgo} ${word} тому`);
+  } else {
+    console.log("Батько вже зараз удвічі старший за сина");
   }
 } else {
   console.log("Невірний варіант вводу");
